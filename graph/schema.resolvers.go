@@ -5,18 +5,28 @@ package graph
 
 import (
 	"context"
+	"crypto/rand"
 	"fmt"
+	"math/big"
 
 	"github.com/elarsaks/learn_go_graphl/graph/generated"
 	"github.com/elarsaks/learn_go_graphl/graph/model"
 )
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
+	rand, _ := rand.Int(rand.Reader, big.NewInt(100))
+
+	todo := &model.Todo{
+		Text:   input.Text,
+		ID:     fmt.Sprintf("T%d", rand),
+		User: &model.User{ID: input.UserID, Name: "user " + input.UserID},
+	}
+	r.todos = append(r.todos, todo)
+	return todo, nil
 }
 
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
+	return r.todos, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
