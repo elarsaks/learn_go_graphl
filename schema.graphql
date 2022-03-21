@@ -1,0 +1,19 @@
+type User {
+	id: ID!
+	userName: String!
+	email: String!
+
+    meetups: [Meetup!]!
+}
+
+type Meetup {
+    id: ID!
+    name String!
+    description String!
+    user: User!
+}
+
+type Query {
+    meetups: [Meetup!]!
+    user(id: ID!): User!
+}
