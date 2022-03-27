@@ -1,3 +1,4 @@
+//go:generate go run github.com/99designs/gqlgen generate
 package graph
 
 import "github.com/elarsaks/learn_go_graphl/graph/model"
